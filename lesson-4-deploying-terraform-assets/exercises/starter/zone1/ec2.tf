@@ -2,7 +2,7 @@
    source             = "./modules/ec2"
    instance_count     = 2
    instance_type      = t3.micro
-   name               = Ubuntu.Web
+   name               = "Ubuntu-Web"
    account            = data.aws_caller_identity.current.account_id
    aws_ami            = "ami-0b9064170e32bde34"
    private_subnet_ids = module.vpc.private_subnet_ids
