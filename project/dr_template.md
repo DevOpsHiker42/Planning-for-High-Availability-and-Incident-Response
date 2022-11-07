@@ -41,7 +41,7 @@ Steps to modify the infrastructure to support DR to Zone 2 and also meet HA requ
 5. Create load balancer in Zone 2
 6. Create DR EC2 servers in Zone 2, and route traffic to the servers via the Zone 1 load balancer
 7. Create DR RDS cluster in Zone 2
-8. Set up replication between Zone 1 and Zone 2 RDS clusters
+8. Set up replication between Zone 1 and Zone 2 RDS clusters and ensure that backup retention is set to 5 days
 9. Create DR EKS cluster in Zone 2
 
 Increasing server / node / instance counts should be done in such a way as to maximise the spread across availability zones within the region, for optimum availability. This requires that the VPC in the region has IPs in the availability zones.
