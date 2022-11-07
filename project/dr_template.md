@@ -22,13 +22,13 @@ The existing infrastructure (before the addition of DR and HA) is summarized in 
 | EKS Cluster| Monitoring cluster | t3.medium   | 1 cluster (with 2 nodes minimum) per region | Created in multiple locations for DR failover |
 
 ### Descriptions
-####EC2 Server
+#### EC2 Server
 Amazon Elastic Compute Cloud (EC2) web server for running e-commerce application on Ubuntu.
 
-####RDS Cluster
+#### RDS Cluster
 AWS Relational Database Service (RDS) cluster using Amazon Aurora database engine.
 
-####EKS Cluster
+#### EKS Cluster
 AWS Elastic Kubernetes Service (EKS) cluster to support Prometheus monitoring and Grafana visualization.
 
 ## DR Plan
