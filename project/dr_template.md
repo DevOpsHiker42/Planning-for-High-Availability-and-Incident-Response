@@ -15,13 +15,41 @@ The existing infrastructure (before the addition of DR and HA) is summarized in 
 ## Servers and Clusters
 
 ### Table 1.1 Summary
-| Asset      | Purpose            | Size        | Qty                                         | DR                                            |
-|------------|--------------------|-------------|---------------------------------------------|-----------------------------------------------|
-| EC2 Server | Web server         | t3.micro    | 3 per region                                | Created in multiple locations for DR failover |
-| RDS Cluster| Database cluster   | db.t2.small | 1 cluster (with 3 instances) per region     | Clusters replicated between zones 1 and 2     |
-| EKS Cluster| Monitoring cluster | t3.medium   | 1 cluster (with 2 nodes minimum) per region | Created in multiple locations for DR failover |
+| Asset            | Purpose                     | Size          | Qty                                    | DR                                         |
+|------------------|-----------------------------|-------------|----------------------------------------|--------------------------------------------|
+| VPC              | Virtual Private Cloud       | N/A         | 1 per region                           | Created in multiple locations for failover |
+| Internet Gateway | Expose Public Subnets       | N/A         | 1 per region                           | Created in multiple locations for failover |
+| Private Subnet   | Private Subnet              | N/A         | 1 per availability zone in each region | Created in multiple locations for failover |
+| Public Subnet    | Public Subnet               | N/A         | 1 per availability zone in each region | Created in multiple locations for failover |
+| NAT Gateway      | Network Address Translation | N/A         | 1 per availability zone in each region | Created in multiple locations for failover |
+| EIP              | Elastic IP Address          | N/A         | 1 per availability zone in each region | Created in multiple locations for failover |
+| ALB              | Application Load Balancer   | N/A         | 1 per region                           | Created in multiple locations for failover |
+| EC2 Server       | Web server                  | t3.micro    | 3 per region                           | Created in multiple locations for failover |
+| RDS Cluster      | Database cluster            | db.t2.small | 1 cluster (3 instances) per region     | Clusters replicated between zones 1 and 2  |
+| EKS Cluster      | Monitoring cluster          | t3.medium   | 1 cluster (2 nodes minimum) per region | Created in multiple locations for failover |
 
 ### Descriptions
+#### VPC
+Virtual Private Cloud -  secure isolated private cloud within a public AWS region.
+
+#### Internet Gateway
+Enables communication between VPC and the Internet.
+
+#### Private Subnet
+Logical subnet with no access to/from Internet.
+
+#### Public Subnet
+Logical subnet with access to/from Internet via Internet Gateway.
+
+#### NAT Gateway
+Network Address Translation service. Provides connectivity between Internet Gateway and private subnets. Hosted in a public subnet.
+
+#### EIP
+Elastic IP address (static IPv4 address) representing public address of NAT Gateway.
+
+#### ALB
+Application Load Balancer - distributes HTTP requests across EC2 web server instances.
+
 #### EC2 Server
 Amazon Elastic Compute Cloud (EC2) web server for running e-commerce application on Ubuntu.
 
@@ -63,8 +91,14 @@ The section describes the existing infrastructure before amending for DR and HA.
 - us-east-2c
 
 ## Servers and Clusters
-| Asset      | Purpose            | Size        | Qty                                         |
-|------------|--------------------|-------------|---------------------------------------------|
-| EC2 Server | Web server         | t3.micro    | 1                                           |
-| RDS Cluster| Database cluster   | db.t2.small | 1 cluster (with 1 instance)                 |
-| EKS Cluster| Monitoring cluster | t3.medium   | 1 cluster (with 1 node minimum)             |
+| Asset            | Purpose                     | Size        | Qty                                    |
+|------------------|-----------------------------|-------------|----------------------------------------|
+| VPC              | Virtual Private Cloud       | N/A         | 1                                      |
+| Internet Gateway | Expose Public Subnets       | N/A         | 1                                      |
+| Private Subnet   | Private Subnet              | N/A         | 1                                      |
+| Public Subnet    | Public Subnet               | N/A         | 1                                      |
+| NAT Gateway      | Network Address Translation | N/A         | 1                                      |
+| EIP              | Elastic IP Address          | N/A         | 1                                      |
+| EC2 Server       | Web server                  | t3.micro    | 1                                      |
+| RDS Cluster      | Database cluster            | db.t2.small | 1 cluster (with 1 instance)            |
+| EKS Cluster      | Monitoring cluster          | t3.medium   | 1 cluster (with 1 node minimum)        |
